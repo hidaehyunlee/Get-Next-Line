@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:53 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/12 22:49:03 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/14 15:53:17 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_array		*ft_resize_array(t_array *arr)
 
 	new_size = arr->size * 2;
 	new_str = (char *)malloc(sizeof(char) * new_size);
-	ft_strcpy(new_str, arr->str);
+	ft_strlcpy(new_str, arr->str, ft_strlen(arr->str) + 1);
 	free(arr->str);
 	arr->str = new_str;
 	arr->size = new_size;
@@ -41,7 +41,7 @@ t_array		*ft_append_str(t_array *arr, char *str)
 {
 	while (ft_strlen(arr->str) + ft_strlen(str) + 2 >= arr->size)
 		ft_resize_array(arr);
-	ft_strcat(arr->str, str);
+	ft_strlcat(arr->str, str, ft_strlen(str) + 1);
 	return (arr);
 }
 

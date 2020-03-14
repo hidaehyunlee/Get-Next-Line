@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/13 23:11:28 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/14 15:58:58 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ int                 get_next_line(int fd, char **line)
     int             ret;
 
     if (!(buf = (char *)malloc(sizeof(char)*BUFFER_SIZE + 1)))
-        return (NULL);
-    temp = ft_create_array();
-    while (cut_addr = ft_strchr(backup, '\n') == 0)
+        return (0);
+    backup = ft_create_array();
+    while (cut_addr = ft_strchr(backup->str, '\n') == 0)
     {
-        eof = read(fd, buf, BUFFER_SIZE) //eof 따로 뺀 이유 -> 0이어도 read_line을 수행해야해서.
+        eof = read(fd, buf, BUFFER_SIZE);
         ft_append_str(backup, buf);
     }
     ret = read_line(backup->str, *line, cut_addr);
     if (eof == 0)
-        return (0) //eof
+        return (0);
     return (ret);
 }
 
@@ -61,7 +61,9 @@ int main(void)
 {
 	char *line = 0;
 	int ret;
-	int fd;	fd = open("your_file_name", O_RDONLY);
+	int fd;	
+	
+	fd = open("test", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		printf("%s\n", line);
