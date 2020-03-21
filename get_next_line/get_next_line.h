@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:34 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/21 23:40:22 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/21 23:55:20 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ t_array			*ft_append_str(t_array *arr, char *str);
 size_t          ft_strlen(const char *s);
 size_t          ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t          ft_strlcat(char *dest, const char *src, size_t dstsize);
-char        	*ft_strchr(const char *s, int c);
+char        	*ft_strchr(char *s, int c);
 
 #endif

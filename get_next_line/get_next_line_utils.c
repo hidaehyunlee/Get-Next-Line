@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:53 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/21 23:40:35 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/21 23:55:22 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ size_t      ft_strlcat(char *dest, const char *src, size_t dstsize)
 	return (dest_len + src_len);
 }
 
-char        *ft_strchr(const char *s, int c)
+char        *ft_strchr(char *s, int c)
 {
     char    find;
     int     i;
