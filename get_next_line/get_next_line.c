@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/14 15:58:58 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/21 22:05:34 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int                 get_next_line(int fd, char **line)
     int             eof;
     int             ret;
 
+	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
+		return (-1);
     if (!(buf = (char *)malloc(sizeof(char)*BUFFER_SIZE + 1)))
         return (0);
     backup = ft_create_array();
