@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:34 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/14 15:50:34 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/21 23:40:22 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 typedef struct		s_array
 {
-	int		        size;
+	size_t		    size;
 	char	        *str;
 }					t_array;
 
