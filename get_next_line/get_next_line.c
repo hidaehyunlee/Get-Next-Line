@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/21 23:41:01 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/21 23:42:53 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ int main(void)
 	fd = open("testfile", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		printf("%s\n", line);
+		printf("line is...%s\n", line);
 		free(line);
 	}
-	printf("%s\n", line);
+	printf("lein is...%s\n", line);
 	free(line);
 	return (0);
 }
