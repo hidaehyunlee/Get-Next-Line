@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/23 13:22:56 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/23 17:37:29 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,45 @@ int                 split_line(char **backup, char **line, char *cut_addr)
 //     return (ret);
 // }
 
-
-int		get_next_line(int fd, char **line)
+int					append_backup(char *buf, char **backup, int read_size)
 {
-	static t_list list;
-	char	*cut;
-	int		read_size;
+	char			*temp;
+	int 			temp_len;
+
+	if (read_size <= 0)
+		return (-1);
+	if (*backup == 0)
+	{
+		if ((*backup = (char *)malloc(read_size + 1)) == 0)
+			return (-1);
+		ft_strlcpy(*backup, buf, read_size + 1);
+		return (1);
+	}
+	temp_len = ft_strlen(*backup) + read_size + 1;
+	if ((temp = (char *)malloc(temp_len)) == 0)
+		return (-1);
+	ft_strlcpy(temp, *backup, temp_len);
+	ft_strlcat(temp, buf, temp_len);
+	free(*backup);
+	*backup = temp;
+	free(temp);
+	return (1);
+}
+
+int					get_next_line(int fd, char **line)
+{
+	static t_list 	list;
+	char			*cut;
+	int				read_size;
 
 	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0))
 		return (-1);
-	list = ft_create_array();
 	while ((cut = ft_strchr(list.backup[fd], '\n')) == 0)
 	{
 		read_size = read(fd, list.buf, BUFFER_SIZE);
-		info.buf[read_size] = 0;
-		ft_append_str(list.backup[fd], list.buf, &fd);
+		info.buf[read_size] = 0; //ft_strlen을 사용하기 위해서
+		if (append_backup(&list.backup[fd], list.buf, &read_size) == -1)
+			return (-1);
 	}
 	return (split_line(&info.backup[fd], line, cut));
 }
