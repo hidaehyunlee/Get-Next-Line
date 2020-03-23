@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:34 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/23 17:05:47 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/23 18:04:58 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 typedef	struct	s_list
 {
 	char		buf[BUFFER_SIZE + 1];
-	char		*str[50];
+	char		*backup[50];
 }				t_list;
 
 int             get_next_line(int fd, char **line);

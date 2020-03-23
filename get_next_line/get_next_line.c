@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/23 17:59:42 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/23 18:06:04 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int					get_next_line(int fd, char **line)
 	while ((cut = ft_strchr(list.backup[fd], '\n')) == 0)
 	{
 		read_size = read(fd, list.buf, BUFFER_SIZE);
-		info.buf[read_size] = 0; //ft_strlen을 사용하기 위해서
-		if (append_backup(&list.backup[fd], list.buf, &read_size) == -1)
+		list.buf[read_size] = 0; //ft_strlen을 사용하기 위해서
+		if (append_backup(&list.backup[fd], list.buf, read_size) == -1)
 			return (-1);
 	}
-	return (split_line(&info.backup[fd], line, cut));
+	return (split_line(&list.backup[fd], line, cut));
 }
 
 int main(void)
