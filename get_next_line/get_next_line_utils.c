@@ -6,42 +6,42 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:53 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/21 23:55:22 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/23 13:23:44 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_array		*ft_create_array(void)
+t_list		*ft_create_array()
 {
-	t_array *array;
+	t_list *array;
 
-	array = (t_array*)malloc(sizeof(t_array));
-	array->size = DEFAULT_ARRAY_SIZE;
-	array->str = (char *)malloc(sizeof(char) * array->size);
-	array->str[0] = 0;
+	array = (t_list*)malloc(sizeof(t_list));
+	array->size = BUFFER_SIZE;
+	array->str[fd] = (char *)malloc(sizeof(char) * array->size);
+	array->str[fd][0] = 0;
 	return (array);
 }
 
-t_array		*ft_resize_array(t_array *arr)
+t_list		*ft_resize_array(t_list *arr, int fd)
 {
 	char	*new_str;
 	int		new_size;
 
 	new_size = arr->size * 2;
 	new_str = (char *)malloc(sizeof(char) * new_size);
-	ft_strlcpy(new_str, arr->str, ft_strlen(arr->str) + 1);
-	free(arr->str);
-	arr->str = new_str;
+	ft_strlcpy(new_str, arr->str[fd], ft_strlen(arr->str[fd]) + 1);
+	free(arr->str[fd]);
+	arr->str[fd] = new_str;
 	arr->size = new_size;
 	return (arr);
 }
 
-t_array		*ft_append_str(t_array *arr, char *str)
+t_list		*ft_append_str(t_list *arr, char *str, int fd)
 {
-	while (ft_strlen(arr->str) + ft_strlen(str) + 2 >= arr->size)
-		ft_resize_array(arr);
-	ft_strlcat(arr->str, str, ft_strlen(str) + 1);
+	while (ft_strlen(arr->str[fd]) + ft_strlen(str) + 2 >= arr->size)
+		ft_resize_array(arr, &fd);
+	ft_strlcat(arr->str[fd], str, ft_strlen(str) + 1);
 	return (arr);
 }
 
