@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/23 18:06:04 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/23 18:16:21 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int					append_backup(char **backup, char *buf, int read_size)
 	if ((temp = (char *)malloc(temp_len)) == 0)
 		return (-1);
 	ft_strlcpy(temp, *backup, temp_len);
+	//ft_strlcpy(temp + ft_strlen(*backup), buf, temp_len);
 	ft_strlcat(temp, buf, temp_len);
 	free(*backup);
 	*backup = temp;
