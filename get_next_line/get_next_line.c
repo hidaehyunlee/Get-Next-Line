@@ -6,11 +6,35 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/24 19:01:16 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/24 21:28:59 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int					append_backup(char **backup, char *buf, int read_size)
+{
+	char			*temp;
+	int 			temp_len;
+
+	if (read_size <= 0)
+		return (-1);
+	if (*backup == 0)
+	{
+		if ((*backup = (char *)malloc(read_size + 1)) == 0)
+			return (-1);
+		ft_strlcpy(*backup, buf, read_size + 1);
+		return (1);
+	}
+	temp_len = ft_strlen(*backup) + read_size + 1;
+	if ((temp = (char *)malloc(temp_len)) == 0)
+		return (-1);
+	ft_strlcpy(temp, *backup, temp_len);
+	ft_strlcat(temp, buf, temp_len);
+	free(*backup);
+	*backup = temp;
+	return (1);
+}
 
 int                 split_line(char **backup, char **line, char *cut)
 {
@@ -35,32 +59,6 @@ int                 split_line(char **backup, char **line, char *cut)
 	return (1);
 }
 
-int					append_backup(char **backup, char *buf, int read_size)
-{
-	char			*temp;
-	int 			temp_len;
-
-	if (read_size <= 0)
-		return (-1);
-	if (*backup == 0)
-	{
-		if ((*backup = (char *)malloc(read_size + 1)) == 0)
-			return (-1);
-		ft_strlcpy(*backup, buf, read_size + 1);
-		return (1);
-	}
-	temp_len = ft_strlen(*backup) + read_size + 1;
-	if ((temp = (char *)malloc(temp_len)) == 0)
-		return (-1);
-	ft_strlcpy(temp, *backup, temp_len);
-	//ft_strlcpy(temp + ft_strlen(*backup), buf, temp_len);
-	ft_strlcat(temp, buf, temp_len);
-	free(*backup);
-	*backup = temp;
-	free(temp);
-	return (1);
-}
-
 int					get_next_line(int fd, char **line)
 {
 	static t_list 	list;
@@ -71,7 +69,14 @@ int					get_next_line(int fd, char **line)
 		return (-1);
 	while ((cut = ft_strchr(list.backup[fd], '\n')) == 0)
 	{
-		read_size = read(fd, list.buf, BUFFER_SIZE);
+		if ((read_size = read(fd, list.buf, BUFFER_SIZE)) <= 0)
+		{
+			if (read_size < 0)
+				return (-1);
+			*line = list.backup[fd];
+			list.backup[fd] = 0;
+			return (0);
+		}
 		list.buf[read_size] = 0;
 		if (append_backup(&list.backup[fd], list.buf, read_size) == -1)
 			return (-1);
@@ -88,10 +93,10 @@ int main(void)
 	fd = open("testfile", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		printf("line is...%s\n", line);
+		printf("%s\n", line);
 		free(line);
 	}
-	printf("lein is...%s\n", line);
+	printf("%s\n", line);
 	free(line);
 	return (0);
 }
