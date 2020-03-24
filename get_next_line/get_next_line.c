@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/24 18:26:47 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/24 19:01:16 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int                 split_line(char **backup, char **line, char *cut)
 	char	        *temp;
 	size_t	        len;
 
-	if ((*line = (char *)malloc(ft_strlen(*backup) + 1)) == 0)
+	if ((*line = (char *)malloc(cut - *backup + 1)) == 0)
 		return (-1);
-	ft_strlcpy(*line, *backup, ft_strlen(*backup) + 1);
+	ft_strlcpy(*line, *backup, cut - *backup + 1);
 	len = ft_strlen(cut + 1);
 	if (len == 0)
 	{
@@ -64,7 +64,7 @@ int					append_backup(char **backup, char *buf, int read_size)
 int					get_next_line(int fd, char **line)
 {
 	static t_list 	list;
-	char			*cut; //'\n' 개행문자가 나타나는 주소
+	char			*cut; 
 	int				read_size;
 
 	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0))
@@ -72,7 +72,7 @@ int					get_next_line(int fd, char **line)
 	while ((cut = ft_strchr(list.backup[fd], '\n')) == 0)
 	{
 		read_size = read(fd, list.buf, BUFFER_SIZE);
-		list.buf[read_size] = 0; //ft_strlen을 사용하기 위해서
+		list.buf[read_size] = 0;
 		if (append_backup(&list.backup[fd], list.buf, read_size) == -1)
 			return (-1);
 	}
