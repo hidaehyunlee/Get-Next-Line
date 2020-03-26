@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/25 23:28:12 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/26 17:05:14 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int					append_backup(char **backup, char *buf, int read_size)
 	char			*temp;
 	int 			temp_len;
 
-	if (read_size <= 0)
-		return (-1);
 	if (*backup == 0)
 	{
 		if ((*backup = (char *)malloc(read_size + 1)) == 0)
@@ -59,6 +57,22 @@ int                 split_line(char **backup, char **line, char *cut)
 	return (1);
 }
 
+int					read_exception(char **backup, char **line, int read_size)
+{
+	if (read_size < 0)
+		return (-1);
+	if (*backup == 0)
+	{
+		if ((*line = (char *)malloc(1)) == 0)
+			return (-1);
+		(*line)[0] = '\0';
+		return (0);
+	}
+	*line = *backup;
+	*backup = 0;
+	return (0);
+}
+
 int					get_next_line(int fd, char **line)
 {
 	static t_list 	list;
@@ -70,13 +84,7 @@ int					get_next_line(int fd, char **line)
 	while ((cut = ft_strchr(list.backup[fd], '\n')) == 0)
 	{
 		if ((read_size = read(fd, list.buf, BUFFER_SIZE)) <= 0)
-		{
-			if (read_size < 0)
-				return (-1);
-			*line = list.backup[fd];
-			list.backup[fd] = 0;
-			return (0);
-		}
+			return(read_exception(&list.backup[fd], line, read_size));
 		list.buf[read_size] = 0;
 		if (append_backup(&list.backup[fd], list.buf, read_size) == -1)
 			return (-1);
@@ -87,19 +95,29 @@ int					get_next_line(int fd, char **line)
 int main(void)
 {
 	char *line = 0;
-	int ret;
+	//int ret;
 	int fd;
-	int fd2;
+	//int fd2;
 	
-	fd = open("testfile", O_RDONLY);
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
+	fd = open("testfile3", O_RDONLY);
+	// while ((ret = get_next_line(fd, &line)) > 0)
+	// {
+	// 	printf("%s\n", line);
+	// 	free(line);
+	// }
+	// printf("%s\n", line);
+	// free(line);
+	if ((get_next_line(fd, &line)) > 0)	
 		printf("%s\n", line);
-		free(line);
-	}
-	printf("%s\n", line);
-	fd2 = open("testfile2", O_RDONLY);
-	get_next_line(fd2, &line);
+	if ((get_next_line(fd, &line)) > 0)	
+		printf("%s\n", line);
+	if ((get_next_line(fd, &line)) > 0)	
+		printf("%s\n", line);
+	if ((get_next_line(fd, &line)) > 0)	
+		printf("%s\n", line);
+	if ((get_next_line(fd, &line)) == 0)	
+		printf("%s\n", line);
+	free(line);
 	printf("%s\n", line);
 	return (0);
 }
