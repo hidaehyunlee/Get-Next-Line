@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:34 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/24 18:27:00 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/26 20:51:39 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 5000
 #endif
 
-typedef	struct	s_list
-{
-	char		buf[BUFFER_SIZE + 1];
-	char		*backup[50];
-}				t_list;
+#ifndef OPEN_MAX
+# define OPEN_MAX 32
+#endif
 
 int             get_next_line(int fd, char **line);
 

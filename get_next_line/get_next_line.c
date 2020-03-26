@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/26 17:05:14 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/26 21:44:12 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,49 +75,40 @@ int					read_exception(char **backup, char **line, int read_size)
 
 int					get_next_line(int fd, char **line)
 {
-	static t_list 	list;
+    static char 	*backup[OPEN_MAX];
+	char		    *buf;
 	char			*cut; 
 	int				read_size;
 
 	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0))
 		return (-1);
-	while ((cut = ft_strchr(list.backup[fd], '\n')) == 0)
+	while ((cut = ft_strchr(backup[fd], '\n')) == 0)
 	{
-		if ((read_size = read(fd, list.buf, BUFFER_SIZE)) <= 0)
-			return(read_exception(&list.backup[fd], line, read_size));
-		list.buf[read_size] = 0;
-		if (append_backup(&list.backup[fd], list.buf, read_size) == -1)
+		if ((buf = (char *)malloc(BUFFER_SIZE + 1)) == 0)
+			return (-1);
+		if ((read_size = read(fd, buf, BUFFER_SIZE)) <= 0)
+			return(read_exception(&backup[fd], line, read_size));
+		buf[read_size] = 0;
+		if (append_backup(&backup[fd], buf, read_size) == -1)
 			return (-1);
 	}
-	return (split_line(&list.backup[fd], line, cut));
+	return (split_line(&backup[fd], line, cut));
 }
 
 int main(void)
 {
 	char *line = 0;
-	//int ret;
+	int ret;
 	int fd;
 	//int fd2;
 	
-	fd = open("testfile3", O_RDONLY);
-	// while ((ret = get_next_line(fd, &line)) > 0)
-	// {
-	// 	printf("%s\n", line);
-	// 	free(line);
-	// }
-	// printf("%s\n", line);
-	// free(line);
-	if ((get_next_line(fd, &line)) > 0)	
+	fd = open("testfile", O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
 		printf("%s\n", line);
-	if ((get_next_line(fd, &line)) > 0)	
-		printf("%s\n", line);
-	if ((get_next_line(fd, &line)) > 0)	
-		printf("%s\n", line);
-	if ((get_next_line(fd, &line)) > 0)	
-		printf("%s\n", line);
-	if ((get_next_line(fd, &line)) == 0)	
-		printf("%s\n", line);
-	free(line);
+		free(line);
+	}
 	printf("%s\n", line);
+	free(line);
 	return (0);
 }
