@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/03/26 21:44:12 by daelee           ###   ########.fr       */
+/*   Updated: 2020/03/27 15:17:47 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int                 split_line(char **backup, char **line, char *cut)
 	return (1);
 }
 
-int					read_exception(char **backup, char **line, int read_size)
+int					return_zero(char **backup, char **line, int read_size)
 {
 	if (read_size < 0)
 		return (-1);
@@ -87,7 +87,7 @@ int					get_next_line(int fd, char **line)
 		if ((buf = (char *)malloc(BUFFER_SIZE + 1)) == 0)
 			return (-1);
 		if ((read_size = read(fd, buf, BUFFER_SIZE)) <= 0)
-			return(read_exception(&backup[fd], line, read_size));
+			return(return_zero(&backup[fd], line, read_size));
 		buf[read_size] = 0;
 		if (append_backup(&backup[fd], buf, read_size) == -1)
 			return (-1);
@@ -102,7 +102,7 @@ int main(void)
 	int fd;
 	//int fd2;
 	
-	fd = open("testfile", O_RDONLY);
+	fd = open("testfile2", O_RDONLY);
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		printf("%s\n", line);
