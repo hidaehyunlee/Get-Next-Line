@@ -6,11 +6,11 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 21:01:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/11 22:31:06 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/11 22:34:37 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int					append_backup(char **backup, char *buf, int read_size)
 {
