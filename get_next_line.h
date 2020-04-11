@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:34 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/11 21:05:01 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/11 22:22:47 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <stdio.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 5000
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5000
+# endif
 
-#ifndef OPEN_MAX
-# define OPEN_MAX 32
-#endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 32
+# endif
 
 int				get_next_line(int fd, char **line);
 

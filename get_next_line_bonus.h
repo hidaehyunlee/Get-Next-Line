@@ -6,25 +6,25 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 21:02:02 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/11 21:05:08 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/11 22:24:37 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 5000
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5000
+# endif
 
-#ifndef OPEN_MAX
-# define OPEN_MAX 32
-#endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 32
+# endif
 
 int				get_next_line(int fd, char **line);
 
