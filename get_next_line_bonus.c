@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/11 21:08:07 by daelee           ###   ########.fr       */
+/*   Created: 2020/04/11 21:01:29 by daelee            #+#    #+#             */
+/*   Updated: 2020/04/11 21:03:25 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,22 @@ int					get_next_line(int fd, char **line)
 			return (-1);
 	}
 	return (split_line(&backup[fd], line, cut));
+}
+
+int main(void)
+{
+	char *line = 0;
+	int ret;
+	int fd;
+	//int fd2;
+
+	fd = open("testfile2", O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	printf("%s\n", line);
+	free(line);
+	return (0);
 }
