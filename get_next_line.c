@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/11 22:26:40 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/15 22:07:52 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int					return_zero(char **backup, char **line, int read_size)
 		return (0);
 	}
 	*line = *backup;
+	free(backup);
 	*backup = 0;
 	return (0);
 }
