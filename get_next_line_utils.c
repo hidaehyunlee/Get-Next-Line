@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:53 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/15 22:51:52 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/15 23:30:59 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,23 @@ char		*ft_strchr(char *s, int c)
 	if (s[i] == find)
 		return ((char *)s + i);
 	return (0);
+}
+
+char	*ft_strdup(char *s1)
+{
+	char	*result;
+	int		i;
+
+	i = ft_strlen(s1);
+	result = (char *)malloc(sizeof(char) * (i + 1));
+	if (!result)
+		return (0);
+	i = 0;
+	while (s1[i])
+	{
+		result[i] = s1[i];
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
 }

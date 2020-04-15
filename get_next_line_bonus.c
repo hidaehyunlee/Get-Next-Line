@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 21:01:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/15 22:51:32 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/15 23:55:08 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int					append_backup(char **backup, char *buf, int read_size)
 	ft_strlcpy(temp, *backup, temp_len);
 	ft_strlcat(temp, buf, temp_len);
 	free(*backup);
+	free(buf);
 	*backup = temp;
-	free(temp);
 	return (1);
 }
 

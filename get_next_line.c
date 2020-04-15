@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/15 22:51:31 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/15 23:54:50 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int					append_backup(char **backup, char *buf, int read_size)
 	ft_strlcpy(temp, *backup, temp_len);
 	ft_strlcat(temp, buf, temp_len);
 	free(*backup);
+	free(buf);
 	*backup = temp;
-	free(temp);
 	return (1);
 }
 
@@ -62,15 +62,13 @@ int					return_zero(char **backup, char **line, int read_size)
 {
 	if (read_size < 0)
 		return (-1);
-	if (*backup == 0)
+	if (*backup != 0)
 	{
-		if ((*line = (char *)malloc(1)) == 0)
-			return (-1);
-		(*line)[0] = '\0';
+		*line = *backup;
+		*backup = 0;
 		return (0);
 	}
-	*line = *backup;
-	*backup = 0;
+	*line = ft_strdup("");
 	return (0);
 }
 
@@ -94,4 +92,21 @@ int					get_next_line(int fd, char **line)
 			return (-1);
 	}
 	return (split_line(&backup[fd], line, cut));
+}
+
+int main(void)
+{
+	char *line = 0;
+	int ret;
+	int fd;
+
+	fd = open("testfile", O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	printf("%s\n", line);
+	free(line);
+	return (0);
 }
