@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/15 22:14:54 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/15 22:51:31 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int					append_backup(char **backup, char *buf, int read_size)
 	ft_strlcat(temp, buf, temp_len);
 	free(*backup);
 	*backup = temp;
+	free(temp);
 	return (1);
 }
 
@@ -61,15 +62,15 @@ int					return_zero(char **backup, char **line, int read_size)
 {
 	if (read_size < 0)
 		return (-1);
-	if (*backup != 0)
+	if (*backup == 0)
 	{
-		*line = *backup;
-		*backup = 0;
+		if ((*line = (char *)malloc(1)) == 0)
+			return (-1);
+		(*line)[0] = '\0';
 		return (0);
 	}
-	if ((*line = (char *)malloc(1)) == 0)
-		return (-1);
-	(*line)[0] = '\0';
+	*line = *backup;
+	*backup = 0;
 	return (0);
 }
 
