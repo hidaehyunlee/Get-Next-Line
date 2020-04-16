@@ -6,7 +6,11 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/04/17 00:00:07 by daelee           ###   ########.fr       */
+=======
+/*   Updated: 2020/04/16 23:35:47 by daelee           ###   ########.fr       */
+>>>>>>> a4f2f6d0169a99fcd565cf67a880c8e4cebae297
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +56,8 @@ int					return_zero(char **backup, char **line, int read_size)
 		return (-1);
 	if (*backup)
 	{
-		*line = *backup;
+		*line = ft_strdup(*backup);
+		free(*backup);
 		*backup = 0;
 		return (0);
 	}
