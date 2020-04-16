@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 21:01:58 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/11 22:27:03 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/17 00:07:40 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,22 +66,41 @@ size_t		ft_strlcat(char *dest, const char *src, size_t dstsize)
 	return (dest_len + src_len);
 }
 
-char		*ft_strchr(char *s, int c)
+char		*ft_strjoin(char *s1, char *s2)
 {
-	char	find;
+	char	*newstr;
+	int		s1_len;
+	int		s2_len;
+
+	if (!(s1) && !(s2))
+		return (NULL);
+	else if (!(s1) || !(s2))
+		return (!(s1) ? ft_strdup(s2) : ft_strdup(s1));
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	if (!(newstr = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1))))
+		return (NULL);
+	ft_strlcpy(newstr, s1, s1_len + 1);
+	free(s1);
+	ft_strlcat(newstr + (s1_len), s2, s2_len + 1);
+	return (newstr);
+}
+
+char		*ft_strdup(char *s1)
+{
+	char	*result;
 	int		i;
 
-	if (s == 0)
+	i = ft_strlen(s1);
+	result = (char *)malloc(sizeof(char) * (i + 1));
+	if (!result)
 		return (0);
-	find = (unsigned char)c;
 	i = 0;
-	while (s[i] != '\0')
+	while (s1[i])
 	{
-		if (s[i] == find)
-			return ((char *)s + i);
+		result[i] = s1[i];
 		i++;
 	}
-	if (s[i] == find)
-		return ((char *)s + i);
-	return (0);
+	result[i] = '\0';
+	return (result);
 }
