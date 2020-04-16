@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:34 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/16 18:21:17 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/16 21:44:29 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int				get_next_line(int fd, char **line);
 size_t			ft_strlen(const char *s);
 size_t			ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dest, const char *src, size_t dstsize);
-char			*ft_strchr(char *s, int c);
 char			*ft_strdup(char *s1);
 char			*ft_strjoin(char *s1, char *s2);
 
