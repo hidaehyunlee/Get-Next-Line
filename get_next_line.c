@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/16 23:26:27 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/16 23:35:47 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int					return_zero(char **backup, char **line, int read_size)
 		return (-1);
 	if (*backup)
 	{
-		*line = *backup;
+		*line = ft_strdup(*backup);
+		free(*backup);
 		*backup = 0;
 		return (0);
 	}
