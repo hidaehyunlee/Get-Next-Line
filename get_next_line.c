@@ -6,33 +6,31 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/15 23:54:50 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/16 18:29:49 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int					append_backup(char **backup, char *buf, int read_size)
+char		*ft_strjoin(char *s1, char *s2)
 {
-	char			*temp;
-	int				temp_len;
+	char	*newstr;
+	int		s1_len;
+	int		s2_len;
 
-	if (*backup == 0)
-	{
-		if ((*backup = (char *)malloc(read_size + 1)) == 0)
-			return (-1);
-		ft_strlcpy(*backup, buf, read_size + 1);
-		return (1);
-	}
-	temp_len = ft_strlen(*backup) + read_size + 1;
-	if ((temp = (char *)malloc(temp_len)) == 0)
-		return (-1);
-	ft_strlcpy(temp, *backup, temp_len);
-	ft_strlcat(temp, buf, temp_len);
-	free(*backup);
-	free(buf);
-	*backup = temp;
-	return (1);
+	if (!(s1) && !(s2))
+		return (NULL);
+	else if (!(s1) || !(s2))
+		return (!(s1) ? ft_strdup(s2) : ft_strdup(s1));
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	if (!(newstr = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1))))
+		return (NULL);
+	ft_strlcpy(newstr, s1, s1_len + 1);
+	free(s1);
+	ft_strlcat(newstr + (s1_len), s2, s2_len + 1);
+	free(s2);
+	return (newstr);
 }
 
 int					split_line(char **backup, char **line, char *cut)
@@ -87,26 +85,25 @@ int					get_next_line(int fd, char **line)
 			return (-1);
 		if ((read_size = read(fd, buf, BUFFER_SIZE)) <= 0)
 			return (return_zero(&backup[fd], line, read_size));
-		buf[read_size] = 0;
-		if (append_backup(&backup[fd], buf, read_size) == -1)
-			return (-1);
+		buf[read_size] = '\0';
+		backup[fd] = ft_strjoin(backup[fd], buf);
 	}
 	return (split_line(&backup[fd], line, cut));
 }
 
-int main(void)
-{
-	char *line = 0;
-	int ret;
-	int fd;
+// int main(void)
+// {
+// 	char *line = 0;
+// 	int ret;
+// 	int fd;
 
-	fd = open("testfile", O_RDONLY);
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		printf("%s\n", line);
-		free(line);
-	}
-	printf("%s\n", line);
-	free(line);
-	return (0);
-}
+// 	fd = open("testfile", O_RDONLY);
+// 	while ((ret = get_next_line(fd, &line)) > 0)
+// 	{
+// 		printf("%s\n", line);
+// 		free(line);
+// 	}
+// 	printf("%s\n", line);
+// 	free(line);
+// 	return (0);
+// }
