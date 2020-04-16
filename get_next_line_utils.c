@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:53 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/15 23:30:59 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/16 18:33:47 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char		*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strdup(char *s1)
+char		*ft_strdup(char *s1)
 {
 	char	*result;
 	int		i;

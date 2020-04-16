@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/16 18:29:49 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/16 18:58:31 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ int					split_line(char **backup, char **line, char *cut)
 {
 	char			*temp;
 	size_t			len;
+	char			*temp_line;
 
-	if ((*line = (char *)malloc(cut - *backup + 1)) == 0)
+	if ((temp_line = (char *)malloc(cut - *backup + 1)) == 0)
 		return (-1);
-	ft_strlcpy(*line, *backup, cut - *backup + 1);
+	ft_strlcpy(temp_line, *backup, cut - *backup + 1);
+	*line = temp_line;
 	len = ft_strlen(cut + 1);
 	if (len == 0)
 	{
@@ -91,19 +93,19 @@ int					get_next_line(int fd, char **line)
 	return (split_line(&backup[fd], line, cut));
 }
 
-// int main(void)
-// {
-// 	char *line = 0;
-// 	int ret;
-// 	int fd;
+int main(void)
+{
+	char *line = 0;
+	int ret;
+	int fd;
 
-// 	fd = open("testfile", O_RDONLY);
-// 	while ((ret = get_next_line(fd, &line)) > 0)
-// 	{
-// 		printf("%s\n", line);
-// 		free(line);
-// 	}
-// 	printf("%s\n", line);
-// 	free(line);
-// 	return (0);
-// }
+	fd = open("testfile", O_RDONLY);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	printf("%s\n", line);
+	free(line);
+	return (0);
+}
