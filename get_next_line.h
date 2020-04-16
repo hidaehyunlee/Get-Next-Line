@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:34 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/16 23:29:52 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/16 23:31:20 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ size_t			ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t			ft_strlcat(char *dest, const char *src, size_t dstsize);
 char			*ft_strdup(char *s1);
 char			*ft_strjoin(char *s1, char *s2);
-//char	*ft_strjoin(char *temp, char *buf);
+
 #endif

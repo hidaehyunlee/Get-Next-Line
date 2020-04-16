@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 18:03:53 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/16 23:29:43 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/17 00:01:50 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,31 +104,3 @@ char		*ft_strdup(char *s1)
 	result[i] = '\0';
 	return (result);
 }
-
-// char	*ft_strjoin(char *temp, char *buf)
-// {
-// 	char	*str;
-// 	int		i;
-// 	int		j;
-
-// 	if (!temp)
-// 		return (ft_strdup(buf));
-// 	if (!buf)
-// 		return (0);
-// 	if (!(str = (char *)malloc
-// (sizeof(char) * (ft_strlen(temp) + ft_strlen(buf) + 1))))
-// 		return (0);
-// 	i = 0;
-// 	while (temp[i])
-// 	{
-// 		str[i] = temp[i];
-// 		i++;
-// 	}
-// 	free(temp);
-// 	temp = 0;
-// 	j = -1;
-// 	while (buf[++j])
-// 		str[i + j] = buf[j];
-// 	str[i + j] = 0;
-// 	return (str);
-// }
