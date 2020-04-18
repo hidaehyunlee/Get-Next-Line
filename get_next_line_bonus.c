@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 21:01:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/18 18:42:38 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/19 01:46:02 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,35 @@ int					is_newline(char *backup)
 	return (-1);
 }
 
-int					split_line(char **backup, char **line, int cut_addr)
+int					split_line(char **backup, char **line, int cut_idx)
 {
 	char			*temp;
 	int				len;
 
-	(*backup)[cut_addr] = '\0';
+	(*backup)[cut_idx] = '\0';
 	*line = ft_strdup(*backup);
-	len = ft_strlen(*backup + cut_addr + 1);
+	len = ft_strlen(*backup + cut_idx + 1);
 	if (len == 0)
 	{
 		free(*backup);
 		*backup = 0;
 		return (1);
 	}
-	temp = ft_strdup(*backup + cut_addr + 1);
+	temp = ft_strdup(*backup + cut_idx + 1);
 	free(*backup);
 	*backup = temp;
 	return (1);
 }
 
-int					return_zero(char **backup, char **line, int read_size)
+int					return_all(char **backup, char **line, int read_size, int cut_idx)
 {
 	if (read_size < 0)
 		return (-1);
-	if (*backup)
+	if (*backup && (cut_idx = is_newline(*backup)) >= 0)
+		return (split_line(backup, line, cut_idx));
+	else if (*backup)
 	{
-		*line = ft_strdup(*backup);
-		free(*backup);
+		*line = *backup;
 		*backup = 0;
 		return (0);
 	}
@@ -66,7 +67,7 @@ int					get_next_line(int fd, char **line)
 	static char		*backup[OPEN_MAX];
 	char			buf[BUFFER_SIZE + 1];
 	int				read_size;
-	int				cut_addr;
+	int				cut_idx;
 
 	if ((fd < 0) || (line == 0) || (BUFFER_SIZE <= 0))
 		return (-1);
@@ -74,10 +75,9 @@ int					get_next_line(int fd, char **line)
 	{
 		buf[read_size] = '\0';
 		backup[fd] = ft_strjoin(backup[fd], buf);
-		if ((cut_addr = is_newline(backup[fd])) >= 0)
-			return (split_line(&backup[fd], line, cut_addr));
+		if ((cut_idx = is_newline(backup[fd])) >= 0)
+			return (split_line(&backup[fd], line, cut_idx));
 	}
-	if (backup[fd] && (cut_addr = is_newline(backup[fd])) >= 0)
-		return (split_line(&backup[fd], line, cut_addr));
-	return (return_zero(&backup[fd], line, read_size));
+	return (return_all(&backup[fd], line, read_size, cut_idx));
 }
+
