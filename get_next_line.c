@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/19 01:45:47 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/19 01:51:41 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ int					split_line(char **backup, char **line, int cut_idx)
 	return (1);
 }
 
-int					return_all(char **backup, char **line, int read_size, int cut_idx)
+int					return_all(char **backup, char **line, int read_size)
 {
+	int				cut_idx;
+
 	if (read_size < 0)
 		return (-1);
 	if (*backup && (cut_idx = is_newline(*backup)) >= 0)
@@ -80,5 +82,5 @@ int					get_next_line(int fd, char **line)
 		if ((cut_idx = is_newline(backup[fd])) >= 0)
 			return (split_line(&backup[fd], line, cut_idx));
 	}
-	return (return_all(&backup[fd], line, read_size, cut_idx));
+	return (return_all(&backup[fd], line, read_size));
 }
