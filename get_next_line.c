@@ -6,11 +6,9 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 17:57:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/19 01:51:41 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/19 01:58:58 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "get_next_line_bonus.h"
 
 #include "get_next_line.h"
 
