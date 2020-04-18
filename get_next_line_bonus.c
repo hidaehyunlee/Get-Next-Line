@@ -6,7 +6,7 @@
 /*   By: daelee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/11 21:01:29 by daelee            #+#    #+#             */
-/*   Updated: 2020/04/17 00:08:12 by daelee           ###   ########.fr       */
+/*   Updated: 2020/04/18 18:42:38 by daelee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ int					get_next_line(int fd, char **line)
 		if ((cut_addr = is_newline(backup[fd])) >= 0)
 			return (split_line(&backup[fd], line, cut_addr));
 	}
+	if (backup[fd] && (cut_addr = is_newline(backup[fd])) >= 0)
+		return (split_line(&backup[fd], line, cut_addr));
 	return (return_zero(&backup[fd], line, read_size));
 }
