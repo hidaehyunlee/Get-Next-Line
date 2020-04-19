@@ -52,5 +52,5 @@ Write a function which returns a line read from a file descriptor, without the n
 
 ### 3. 삽질의 기록들
 
-프로젝트를 진행하기 위해서 몇 가지 선행 지식들을 공부할 필요가 있었고, 코드를 짜면서도 고민해야할 지점들이 많았다. 그 삽질의 기록(?)을 [블로그]([https://velog.io/@hidaehyunlee/GetNextLine-%EC%82%BD%EC%A7%88%EC%9D%98-%EA%B8%B0%EB%A1%9D](https://velog.io/@hidaehyunlee/GetNextLine-삽질의-기록)에 정리해 두었다.
+프로젝트를 진행하기 위해서 몇 가지 선행 지식들을 공부할 필요가 있었고, 코드를 짜면서도 고민해야할 지점들이 많았다. 그 삽질의 기록(?)을 [블로그](https://velog.io/@hidaehyunlee/GetNextLine-%EC%82%BD%EC%A7%88%EC%9D%98-%EA%B8%B0%EB%A1%9D)에 정리해 두었다.
 
